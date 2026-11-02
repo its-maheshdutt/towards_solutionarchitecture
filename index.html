@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<title>Geospatial Engineer Roadmap</title>
+<style>
+  :root{
+    --bg:#EDEFE6;
+    --surface:#FFFFFF;
+    --surface-2:#F5F6EE;
+    --ink:#1D2A22;
+    --muted:#5B6B5C;
+    --line:#D9DCCB;
+    --accent:#C15F2B;
+    --accent-strong:#9C4A1F;
+    --accent-soft:#F2E1D2;
+    --accent2:#2C6E76;
+    --accent2-soft:#DCEBEA;
+    --good:#26683C;
+    --good-soft:#DDEEE1;
+    --warn:#8A5A00;
+    --warn-soft:#F6E7C4;
+    --bad:#9E3232;
+    --bad-soft:#F4DCDA;
+    --shadow: 0 1px 2px rgba(29,42,34,0.07), 0 10px 26px -14px rgba(29,42,34,0.22);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12160F;
+      --surface:#1A2016;
+      --surface-2:#20271B;
+      --ink:#E7ECDD;
+      --muted:#9CAA93;
+      --line:#323A2A;
+      --accent:#E2793C;
+      --accent-strong:#F3A671;
+      --accent-soft:#332218;
+      --accent2:#63B4BB;
+      --accent2-soft:#1B2D2D;
+      --good:#71CB8B;
+      --good-soft:#1B2E21;
+      --warn:#E6BA55;
+      --warn-soft:#33290F;
+      --bad:#E58080;
+      --bad-soft:#371C1C;
+      --shadow: 0 1px 2px rgba(0,0,0,.5), 0 14px 30px -16px rgba(0,0,0,.65);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12160F;
+    --surface:#1A2016;
+    --surface-2:#20271B;
+    --ink:#E7ECDD;
+    --muted:#9CAA93;
+    --line:#323A2A;
+    --accent:#E2793C;
+    --accent-strong:#F3A671;
+    --accent-soft:#332218;
+    --accent2:#63B4BB;
+    --accent2-soft:#1B2D2D;
+    --good:#71CB8B;
+    --good-soft:#1B2E21;
+    --warn:#E6BA55;
+    --warn-soft:#33290F;
+    --bad:#E58080;
+    --bad-soft:#371C1C;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 14px 30px -16px rgba(0,0,0,.65);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    text-wrap:balance;
+    margin:0;
+  }
+  .mono{font-family:"IBM Plex Mono", "SFMono-Regular", Menlo, monospace;}
+  a{color:var(--accent-strong);}
+  a:focus-visible, input:focus-visible{outline:2px solid var(--accent2);outline-offset:2px;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+  @media (max-width:640px){ .wrap{padding:0 16px;} }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:56px 0 36px;border-bottom:1px solid var(--line);}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"IBM Plex Mono";font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--accent-strong);margin-bottom:18px;
+  }
+  .eyebrow::before{content:"◎";font-size:14px;}
+  .hero h1{font-size:clamp(30px,5vw,44px);line-height:1.08;max-width:18ch;}
+  .hero .dest{color:var(--accent-strong);}
+  .hero p.lede{max-width:60ch;color:var(--muted);font-size:16.5px;margin-top:16px;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+  .meta-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--surface-2);border:1px solid var(--line);border-radius:999px;
+    padding:6px 14px;font-size:13px;color:var(--muted);font-family:"IBM Plex Mono";
+  }
+  .meta-chip b{color:var(--ink);font-weight:600;}
+
+  .spark{
+    margin-top:28px;max-width:720px;background:var(--surface);
+    border:1.5px dashed var(--accent);border-radius:var(--radius);padding:20px 22px;
+  }
+  .spark .label{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-strong);}
+  .spark h3{font-size:20px;margin:6px 0 6px;}
+  .spark p{margin:0 0 10px;color:var(--muted);font-size:14.5px;max-width:62ch;}
+  .spark ol{margin:0;padding-left:20px;font-size:14px;display:flex;flex-direction:column;gap:4px;}
+  .spark .fine{margin:12px 0 0;font-size:12.5px;}
+
+  nav.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:28px;}
+  nav.jump a{
+    font-size:13px;color:var(--muted);text-decoration:none;border:1px solid var(--line);
+    padding:6px 12px;border-radius:8px;background:var(--surface);
+  }
+  nav.jump a:hover{border-color:var(--accent);color:var(--accent-strong);}
+
+  section{padding:44px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .section-head{margin-bottom:24px;}
+  .section-head .tag{
+    font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--accent2);display:block;margin-bottom:8px;
+  }
+  .section-head h2{font-size:clamp(22px,3vw,28px);}
+  .section-head p{color:var(--muted);max-width:64ch;margin-top:8px;font-size:15px;}
+
+  /* ---------- Coverage table ---------- */
+  .table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);}
+  table.cov{border-collapse:collapse;width:100%;min-width:700px;font-size:14px;}
+  table.cov th{
+    text-align:left;font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--muted);font-weight:500;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface-2);
+  }
+  table.cov td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.cov tr:last-child td{border-bottom:none;}
+  table.cov td:first-child{font-weight:600;width:26%;}
+  table.cov td:nth-child(2){width:34%;color:var(--muted);}
+  .pill{
+    display:inline-block;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.04em;
+    padding:2px 9px;border-radius:999px;margin-bottom:6px;font-weight:600;
+  }
+  .pill.ok{background:var(--good-soft);color:var(--good);}
+  .pill.part{background:var(--warn-soft);color:var(--warn);}
+  .pill.gap{background:var(--bad-soft);color:var(--bad);}
+  .note-box{
+    margin-top:16px;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;
+    padding:14px 18px;font-size:14px;color:var(--muted);max-width:80ch;
+  }
+  .note-box b{color:var(--ink);}
+
+  /* ---------- Coordinates panel ---------- */
+  .coords{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:720px){.coords{grid-template-columns:1fr;}}
+  .coord-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 22px 20px;box-shadow:var(--shadow);
+  }
+  .coord-card .readout{
+    font-family:"IBM Plex Mono";font-size:12px;color:var(--muted);
+    display:flex;justify-content:space-between;margin-bottom:14px;padding-bottom:12px;border-bottom:1px dashed var(--line);
+  }
+  .coord-card .readout .lat{color:var(--accent-strong);}
+  .coord-card h3{font-size:18px;margin-bottom:4px;}
+  .coord-card .role{font-size:13px;color:var(--muted);margin-bottom:14px;}
+  .skill-grp{margin-bottom:14px;}
+  .skill-grp h4{
+    font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+    font-family:"IBM Plex Mono";font-weight:500;margin:0 0 6px;
+  }
+  .skill-grp ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px;}
+  .skill-grp li{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:7px;
+    padding:4px 9px;font-size:12.5px;color:var(--ink);
+  }
+  .coord-card.dest{border-color:var(--accent-soft);}
+  .coord-card.dest .skill-grp li{background:var(--accent-soft);border-color:transparent;color:var(--accent-strong);}
+
+  /* ---------- Cards used in research, AI rules, positioning ---------- */
+  .pos-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;}
+  @media (max-width:720px){.pos-grid{grid-template-columns:1fr;}}
+  .pos-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);}
+  .pos-card.wide{grid-column:1 / -1;}
+  .pos-card h3{font-size:16px;margin-bottom:10px;}
+  .pos-card p{font-size:14px;color:var(--muted);margin:0 0 10px;}
+  .pos-card p b{color:var(--ink);}
+  .title-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .title-list li{
+    font-size:14px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:8px 12px;
+  }
+  .title-list li .role-name{font-weight:600;}
+  .source-list{font-size:12.5px;color:var(--muted);margin-top:6px;}
+  .source-list a{color:var(--muted);text-decoration:underline;}
+
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+  @media (max-width:720px){.rules{grid-template-columns:1fr;}}
+  .rule{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);}
+  .rule .rn{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);}
+  .rule h3{font-size:17px;margin:4px 0 8px;}
+  .rule p{margin:0;font-size:14px;color:var(--muted);}
+  .hygiene ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted);}
+  .hygiene li b{color:var(--ink);}
+
+  /* ---------- Build wall ---------- */
+  .build-group{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;}
+  .build-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+  @media (max-width:720px){.build-grid{grid-template-columns:1fr;}}
+  .build{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .build .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .tagchip{
+    font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--accent-soft);color:var(--accent-strong);border-radius:6px;padding:2px 8px;
+  }
+  .tagchip.phase{background:var(--accent2-soft);color:var(--accent2);}
+  .build h3{font-size:19px;}
+  .build p{margin:0;font-size:14px;color:var(--muted);}
+  .build .wow{font-size:13.5px;color:var(--ink);}
+  .build .wow b{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-strong);margin-right:6px;}
+  .build .caveat{font-size:12.5px;}
+  .shipped{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:auto;padding-top:6px;border-top:1px dashed var(--line);}
+  .shipped input{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;}
+  .shipped label{cursor:pointer;}
+
+  /* ---------- Journey overview ---------- */
+  .overview-bar{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;margin-bottom:22px;box-shadow:var(--shadow);
+  }
+  .overview-bar .top-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .overview-bar .top-row .label{font-family:"IBM Plex Mono";font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+  .overview-bar .top-row .pct{font-family:"IBM Plex Mono";font-size:13px;color:var(--accent-strong);font-weight:600;}
+  .track{height:8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);margin-top:10px;overflow:hidden;}
+  .track-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-strong));width:0%;transition:width .4s ease;}
+  @media (prefers-reduced-motion: reduce){ .track-fill{transition:none;} }
+  .wp-strip{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+  .wp-strip a{
+    flex:1 1 130px;text-decoration:none;color:var(--ink);
+    background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:12px;
+  }
+  .wp-strip a .wp-n{font-family:"IBM Plex Mono";color:var(--accent2);display:block;font-size:11px;margin-bottom:2px;}
+
+  /* ---------- Route / phases ---------- */
+  .route{position:relative;display:flex;flex-direction:column;gap:26px;}
+  .route::before{
+    content:"";position:absolute;left:19px;top:10px;bottom:10px;width:2px;
+    background:repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 12px);
+  }
+  @media (max-width:600px){ .route::before{left:14px;} }
+  .phase{display:grid;grid-template-columns:40px 1fr;gap:16px;}
+  @media (max-width:600px){ .phase{grid-template-columns:28px 1fr;} }
+  .wp-marker{
+    width:40px;height:40px;border-radius:50%;background:var(--surface);border:2px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono";font-size:13px;
+    font-weight:600;color:var(--accent-strong);flex-shrink:0;position:relative;z-index:1;
+  }
+  @media (max-width:600px){ .wp-marker{width:28px;height:28px;font-size:10px;} }
+  .phase-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 24px;box-shadow:var(--shadow);min-width:0;
+  }
+  .phase-card .ph-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:12px;}
+  .phase-card h3{font-size:20px;}
+  .phase-card .ph-time{
+    font-family:"IBM Plex Mono";font-size:12px;color:var(--muted);white-space:nowrap;
+    background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px 11px;
+  }
+  .ship{
+    background:var(--accent-soft);border-radius:10px;padding:12px 16px;font-size:14px;margin-bottom:14px;
+  }
+  .ship b{font-family:"IBM Plex Mono";font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong);display:block;margin-bottom:4px;}
+  .ship .side{display:block;margin-top:6px;font-size:13px;color:var(--muted);}
+  .phase-card .objective{color:var(--muted);font-size:14.5px;margin:0 0 16px;max-width:64ch;}
+  .sub{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;}
+  .stack-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+  .stack-row .chip{
+    font-family:"IBM Plex Mono";font-size:12px;background:var(--accent2-soft);color:var(--accent2);
+    border-radius:6px;padding:3px 9px;
+  }
+  .checklist{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:14px;}
+  .checklist input[type="checkbox"]{
+    margin-top:3px;width:16px;height:16px;accent-color:var(--accent);flex-shrink:0;cursor:pointer;
+  }
+  .checklist label{cursor:pointer;}
+  .checklist input:checked + label{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line);}
+  .foundation-note{
+    background:var(--accent2-soft);border-radius:10px;
+    padding:12px 16px;font-size:14px;margin-bottom:16px;
+  }
+  .foundation-note b{font-family:"IBM Plex Mono";font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent2);display:block;margin-bottom:4px;}
+  .ai-block{
+    border:1px solid var(--accent2);border-radius:10px;padding:14px 16px 4px;margin-bottom:6px;
+  }
+  .ai-block .ai-title{
+    display:block;font-family:"IBM Plex Mono";font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;
+    color:var(--accent2);margin-bottom:4px;font-weight:600;
+  }
+  .ai-block p{margin:0 0 10px;font-size:13.5px;color:var(--muted);}
+  .cert-note{margin-top:12px;font-size:13px;color:var(--muted);}
+  .cert-note .badge{
+    display:inline-flex;align-items:center;gap:5px;background:var(--accent-soft);color:var(--accent-strong);
+    font-family:"IBM Plex Mono";font-size:11.5px;border-radius:6px;padding:2px 8px;margin-right:6px;
+  }
+  .watch-note{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted);}
+  .watch-note b{color:var(--ink);font-family:"IBM Plex Mono";font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:6px;}
+
+  footer{padding:36px 0 64px;color:var(--muted);font-size:13px;max-width:80ch;}
+  footer .rule-line{border-top:1px dashed var(--line);margin-bottom:20px;}
+  footer p{margin:0 0 10px;}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Field brief · Mahesh Dutt Lingamgunta</span>
+    <h1>From GIS consultant to <span class="dest">AI-native geospatial data engineer</span></h1>
+    <p class="lede">A build-first plan made from your CV, your earlier portfolio plans and your own list of interests. Every phase ships something you can show, teaches the engineering it demands, and puts AI into how you work as well as what you make. Fundamentals carry the weight, so new tools stay easy to pick up.</p>
+    <div class="meta-row">
+      <span class="meta-chip"><b>10-15 hrs/wk</b> · aggressive pace</span>
+      <span class="meta-chip"><b>9-12 months</b> · 6 builds</span>
+      <span class="meta-chip"><b>Azure</b> first, AWS second</span>
+      <span class="meta-chip"><b>AI in every phase</b></span>
+      <span class="meta-chip"><b>Fundamentals first</b></span>
+    </div>
+
+    <div class="spark">
+      <span class="label">Start this week</span>
+      <h3>Field Watch v0: your first ship in 7 days</h3>
+      <p>A satellite look at one field near Tirupati, with plain-language notes in Telugu and English. Small enough for a week, and it touches geo, cloud-style data access and AI at once.</p>
+      <ol>
+        <li>Draw a small polygon around one field in QGIS and save it as GeoJSON.</li>
+        <li>Pull a year of Sentinel-2 images for it from a public STAC API (Earth Search or Microsoft Planetary Computer), cloud cover under 20%.</li>
+        <li>Compute NDVI for each date and plot the season as a line.</li>
+        <li>Add daily rainfall and temperature from Open-Meteo or NASA POWER on the same chart.</li>
+        <li>Send the numbers (not the images) to an LLM and ask for a five-line summary in Telugu and English, with the numbers printed beside it.</li>
+        <li>Publish the notebook and one screenshot, and note what surprised you.</li>
+      </ol>
+      <p class="fine">Public data only. This is a learning demo, not agronomic advice: check anything you would act on with a local agronomist.</p>
+    </div>
+
+    <nav class="jump">
+      <a href="#coverage">Coverage check</a>
+      <a href="#position">Where you stand</a>
+      <a href="#research">Market &amp; research</a>
+      <a href="#ai">AI rules</a>
+      <a href="#builds">Build wall</a>
+      <a href="#overview">Route</a>
+      <a href="#p1">1 · Foundations</a>
+      <a href="#p2">2 · Pipelines</a>
+      <a href="#p3">3 · Azure</a>
+      <a href="#p4">4 · Big geo data</a>
+      <a href="#p5">5 · Products &amp; apps</a>
+      <a href="#p6">6 · Geo-AI</a>
+      <a href="#positioning">Positioning</a>
+    </nav>
+  </header>
+
+  <section id="coverage">
+    <div class="section-head">
+      <span class="tag">Honest check</span>
+      <h2>Does the plan cover what you asked for?</h2>
+      <p>I checked the roadmap against your six goals, your two new asks, and the plans already in your project: the 5-month portfolio plan, the 21 exercises and the 6-month market plan. Most of it held. The AI work and the excitement were the weak spots, and both are rebuilt below.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="cov">
+        <thead>
+          <tr><th>What you asked for</th><th>Before this update</th><th>Now</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Solve real data engineering problems</td>
+            <td><span class="pill ok">COVERED</span><br>Flagships in phases 2 to 4.</td>
+            <td>Each phase now starts from a build you care about, run on real open data (see the Build wall).</td>
+          </tr>
+          <tr>
+            <td>Develop data pipelines</td>
+            <td><span class="pill ok">COVERED</span><br>Phase 2: Airflow, dbt, quality checks, CI.</td>
+            <td>Adds LLM steps inside pipelines, scored against a golden test set (A2).</td>
+          </tr>
+          <tr>
+            <td>Build and customise geo data products</td>
+            <td><span class="pill ok">COVERED</span><br>Phase 5: API, web map, QGIS plugin.</td>
+            <td>The Plan Reader product adds cited answers, and refusals when the source is silent.</td>
+          </tr>
+          <tr>
+            <td>Data architecture connected to software and pipelines</td>
+            <td><span class="pill ok">COVERED</span><br>Phase 4 and the Azure phase.</td>
+            <td>Adds agent-facing interfaces (MCP servers) and data contracts, which is where architecture is heading.</td>
+          </tr>
+          <tr>
+            <td>Python, cloud, SQL and Postgres pro</td>
+            <td><span class="pill part">PARTIAL</span><br>Strong on tuning and Azure. Nothing on SQL with AI.</td>
+            <td>Adds vectors, hybrid search and RAG inside Postgres (A3), which is also the core of DP-800 on your list.</td>
+          </tr>
+          <tr>
+            <td>Plug data products into web and desktop apps</td>
+            <td><span class="pill ok">COVERED</span><br>Phase 5: MapLibre, PyQGIS.</td>
+            <td>An agent that calls your API as tools, with a human approval step before any write (A5).</td>
+          </tr>
+          <tr>
+            <td>AI integration on par with engineering</td>
+            <td><span class="pill part">PARTIAL</span><br>AI sat in the last phase only.</td>
+            <td>AI practice in all six phases: coding with discipline, LLMs in pipelines, RAG, MCP servers, evals and guardrails.</td>
+          </tr>
+          <tr>
+            <td>Stay relevant in the age of AI</td>
+            <td><span class="pill part">PARTIAL</span><br>Foundation-model content, but no evals, no policy, no habit of measuring.</td>
+            <td>Four working rules, a model-swap design rule, and AI hygiene taken from your employer's policy.</td>
+          </tr>
+          <tr>
+            <td>Build real things that excite you, from all your aspirations</td>
+            <td><span class="pill gap">GAP</span><br>Flagships mirrored work projects.</td>
+            <td>Six builds and three side quests across agriculture, urban planning, utilities, offshore, LIDAR, India land data and climbing.</td>
+          </tr>
+          <tr>
+            <td>Reuse your earlier plans</td>
+            <td><span class="pill part">PARTIAL</span><br>Not reconciled with the roadmap.</td>
+            <td>Your five portfolio projects return as upgraded builds (grid dashboard, ETL, heat map, warehouse, GeoBot). Tick what you already finished.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box"><b>Also noticed in your project files.</b> Your 6-month plan puts FME and Azure at the top of what Dutch employers ask for. FME is already part of your day job, so treat it as a strength to keep sharp and a source of real pipeline patterns. Azure is Phase 3. DP-800 (SQL AI Developer Associate) was on your list for 24 October: tick it off in Phase 3, or re-plan it if it slipped.</div>
+  </section>
+
+  <section id="position">
+    <div class="section-head">
+      <span class="tag">Where you're standing</span>
+      <h2>Current position vs. destination</h2>
+      <p>You are not starting from zero. Four years at Spatial Eye across TenneT, Alliander, Stedin and PWN is a real foundation. The gap is software-engineering depth, cloud-native architecture, AI engineering, and the last mile of turning a pipeline into a product.</p>
+    </div>
+    <div class="coords" id="destination">
+      <div class="coord-card">
+        <div class="readout"><span class="lat">52.19°N, 5.97°E</span><span>NOW</span></div>
+        <h3>GIS &amp; Geo-Data Consultant</h3>
+        <div class="role">4 yrs · Spatial Eye · TenneT / Alliander / Stedin / PWN</div>
+        <div class="skill-grp">
+          <h4>Domain</h4>
+          <ul><li>Utility networks (electric/water)</li><li>Urban &amp; regional planning</li><li>IMKL / INSPIRE / AVG-GDPR</li><li>Agile cross-team delivery</li></ul>
+        </div>
+        <div class="skill-grp">
+          <h4>Spatial data &amp; DB</h4>
+          <ul><li>PostgreSQL / PostGIS</li><li>SQL</li><li>WFS / GeoServer</li><li>CBS · BRO · BRK · PDOK</li></ul>
+        </div>
+        <div class="skill-grp">
+          <h4>Python &amp; tooling</h4>
+          <ul><li>GeoPandas · Rasterio · GDAL</li><li>Pandas · NumPy · Xarray · PySAL</li><li>FME ETL</li><li>QGIS · ArcGIS Pro · S3</li></ul>
+        </div>
+      </div>
+      <div class="coord-card dest">
+        <div class="readout"><span class="lat">TARGET LOCK</span><span>+12mo</span></div>
+        <h3>AI-native Geospatial Data Engineer</h3>
+        <div class="role">The rare overlap: domain depth × modern data platform × AI engineering</div>
+        <div class="skill-grp">
+          <h4>Your six goals, mapped</h4>
+          <ul>
+            <li>① Solve real data-eng problems</li>
+            <li>② Build pipelines</li>
+            <li>③ Ship geo data products</li>
+            <li>④ Design data architecture</li>
+            <li>⑤ Python / cloud / SQL pro</li>
+            <li>⑥ Plug into web &amp; desktop apps</li>
+          </ul>
+        </div>
+        <div class="skill-grp">
+          <h4>New stack, at a glance</h4>
+          <ul><li>Airflow · dbt</li><li>Azure (ADF, Databricks, AKS)</li><li>Sedona · GeoParquet · STAC</li><li>FastAPI · MapLibre · PyQGIS</li><li>pgvector · RAG · MCP · evals</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="section-head">
+      <span class="tag">Checked, not guessed</span>
+      <h2>What the 2026 market and the research actually say</h2>
+      <p>Frameworks age out in a couple of years. The reasoning underneath them does not. So the plan weights the parts that outlast any one tool (math, data-structure and database theory, distributed-systems trade-offs, geodesy) at least as heavily as the tool of the month. Phase 1 is written to that rule.</p>
+    </div>
+    <div class="pos-grid">
+      <div class="pos-card">
+        <h3>Market signals (2026)</h3>
+        <p><b>Engineering, not analysis, is where the pay is.</b> Across 343 disclosed 2026 postings, geospatial software and data-engineering roles top every other geospatial job family, ahead of GIS analysis, cartography and remote sensing. Python, cloud platforms and backend skills are named as the drivers of the jump to senior pay.</p>
+        <p><b>Analysis is moving into the cloud warehouse.</b> Continental-scale spatial analytics increasingly runs inside cloud data platforms instead of being exported to desktop GIS. That is what phases 3 and 4 are for.</p>
+        <p><b>Open data is consolidating around AI grounding.</b> Overture Maps' entity IDs (GERS) are being adopted so AI pipelines can point to verified real-world places instead of guessing. Microsoft reports measurable address-accuracy gains from switching.</p>
+        <p><b>Digital twins are becoming a compliance requirement</b> for asset-heavy sectors, which includes the utility clients you already serve. Phase 4 is built around one.</p>
+        <p class="source-list">Sources: <a href="https://www.geo-careers.com/posts/geospatial-salaries-2026/" target="_blank" rel="noopener">GEO CAREERS, Geospatial Salaries 2026</a> · <a href="https://biomedware.com/5-geospatial-trends/" target="_blank" rel="noopener">BioMedware, 5 Geospatial Trends for 2026</a> · <a href="https://www.prnewswire.com/news-releases/overture-maps-foundation-reaches-50-members-as-industry-converges-on-open-data-to-ground-ai-302823414.html" target="_blank" rel="noopener">Overture Maps Foundation, 50-member release</a></p>
+      </div>
+      <div class="pos-card">
+        <h3>Academic frontier</h3>
+        <p><b>The field has moved from "build a model" to "adapt one."</b> Remote-sensing foundation models (Clay, Prithvi and others built on vision transformers) are pretrained starting points that get fine-tuned or prompted per task. A 2025 survey of multimodal geospatial foundation models tracks the shift from few-shot to zero-shot transfer.</p>
+        <p><b>The same survey is direct about the gaps:</b> weak generalization across sensors and resolutions, poor interpretability for high-stakes use, and real compute and privacy limits. A pretrained model fixes none of these for you, which is an argument for knowing what is under the hood.</p>
+        <p><b>Location is becoming a learned feature.</b> Geo-embedding models represent coordinates as context-aware vectors instead of raw lat/long. They drop into ordinary classification and regression, so they are a cheap, durable skill (Phase 6).</p>
+        <p class="source-list">Sources: <a href="https://arxiv.org/html/2510.22964v1" target="_blank" rel="noopener">Survey of Multimodal Geospatial Foundation Models (arXiv 2510.22964)</a> · <a href="https://www.esri.com/about/newsroom/arcnews/geoai-in-the-age-of-foundation-models" target="_blank" rel="noopener">Esri ArcNews, GeoAI in the Age of Foundation Models</a> · <a href="https://dl.acm.org/doi/10.1145/3589132.3625616" target="_blank" rel="noopener">Geo-Foundation Models: Reality, Gaps and Opportunities (ACM SIGSPATIAL)</a></p>
+      </div>
+      <div class="pos-card wide">
+        <h3>Engineering in the AI age</h3>
+        <p><b>Routine build work is being handed to agents.</b> One 2026 prediction piece (Datafold, so one informed view and not settled fact) expects agents to take over most routine code writing, debugging and migration work. The skills it expects to grow: context and metadata that agents can use, safe and governed agent access to data, complex SQL written correctly, and working with stakeholders.</p>
+        <p><b>Agent-facing interfaces are already shipping in geospatial.</b> A FOSS4G:UK 2026 talk describes a team that moved from a custom chatbot to an MCP server over PostGIS, deployed on Azure Functions, so any AI agent can query their geospatial data safely. That is close to the stack in this roadmap, and Phase 4 has you build the same pattern.</p>
+        <p><b>The database vendor is formalising it.</b> Microsoft's DP-800 (SQL AI Developer Associate) covers embeddings, vector and hybrid search and RAG next to T-SQL tuning, security and CI/CD. A training provider's summary puts roughly a quarter to a third of the exam on the AI part. Confirm the weights in Microsoft's own study guide.</p>
+        <p><b>Measure, do not trust the feeling.</b> A 2025 randomized trial by METR (16 experienced open-source developers, 246 issues) found tasks took 19% longer with AI allowed, while the developers believed it had made them 20% faster. The tools have improved since and the sample is small, so read it as a reason to keep your own timing log. The figures come from a secondary write-up, so check the original paper before quoting them.</p>
+        <p class="source-list">Sources: <a href="https://datafold.com/blog/data-engineering-in-2026-predictions" target="_blank" rel="noopener">Datafold, Data Engineering in 2026 predictions</a> · <a href="https://talks.osgeo.org/foss4g-uk-2026/talk/U8CPK7/" target="_blank" rel="noopener">FOSS4G:UK 2026, How to give AI access to your PostGIS server</a> · <a href="https://www.cloudthat.com/resources/blog/dp-800-certification-developing-ai-enabled-database-solutions" target="_blank" rel="noopener">CloudThat, DP-800 overview</a> · <a href="https://letsdatascience.com/blog/developers-thought-ai-made-them-faster-the-data-said-otherwise" target="_blank" rel="noopener">LetsDataScience, summary of the METR trial</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai">
+    <div class="section-head">
+      <span class="tag">Working with AI</span>
+      <h2>Four rules for the AI age</h2>
+      <p>AI is a thread through all six phases, not a topic saved for the end. Each phase has a teal AI block with its own checklist. These four rules govern all of them.</p>
+    </div>
+    <div class="rules">
+      <div class="rule">
+        <span class="rn">Rule 1</span>
+        <h3>You own the design and the tests</h3>
+        <p>Write the spec, the data contract and the failing test yourself, then let an agent draft the code. If you cannot explain a diff, do not merge it.</p>
+      </div>
+      <div class="rule">
+        <span class="rn">Rule 2</span>
+        <h3>Measure, do not feel</h3>
+        <p>Time a task with and without AI and count the defects. Keep the log. Your own numbers beat any headline, including the ones above.</p>
+      </div>
+      <div class="rule">
+        <span class="rn">Rule 3</span>
+        <h3>Learn it first, then speed it up</h3>
+        <p>Derive the CRS transformation by hand before asking a tool. Use AI as a tutor that quizzes you, not as a way to skip the lesson. The fundamentals are what let you judge its output.</p>
+      </div>
+      <div class="rule">
+        <span class="rn">Rule 4</span>
+        <h3>Design for swapping models</h3>
+        <p>Put every model call behind a small interface so you can change vendor or size, or run an open-weight model locally for sensitive data. Models will change several times during this roadmap.</p>
+      </div>
+    </div>
+    <div class="pos-card hygiene">
+      <h3>AI hygiene at Spatial Eye</h3>
+      <p>A working summary of your employer's AI policy (v2.2). The full text on the IT/Asset Management SharePoint site is the authority, so re-read it before you start building.</p>
+      <ul>
+        <li><b>Prototype with public or synthetic data only.</b> Customer network data, exports and databases stay out of AI tools unless a written customer agreement exists.</li>
+        <li><b>Clean logs, stack traces and configs first.</b> Replace host names, IP addresses, user names, customer names and credentials with placeholders.</li>
+        <li><b>Never paste secrets.</b> No passwords, API keys, tokens or connection strings with credentials, in any tool.</li>
+        <li><b>You verify the output.</b> Code, figures and contract text are yours to check before anyone relies on them.</li>
+        <li><b>Pick the right tool.</b> Claude is for software development and technical problem-solving. Mail, documents, meetings and Teams content go to Microsoft 365 Copilot.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="builds">
+    <div class="section-head">
+      <span class="tag">What you will build</span>
+      <h2>Six builds and three side quests</h2>
+      <p>Each build starts from something in your own life or work, uses open data, and ends in a demo you can show in under a minute. The phases below teach what each build demands. Tick a build when it is live, and record the demo while it is fresh.</p>
+    </div>
+
+    <p class="build-group">Main line, one per phase</p>
+    <div class="build-grid">
+      <div class="build">
+        <div class="top"><span class="tagchip">Climbing</span><span class="tagchip phase">Phase 1</span></div>
+        <h3>Send Window</h3>
+        <p>A command-line tool and one-page site that ranks climbing crags near Arnhem by distance and this week's forecast, and tells you the best dry window.</p>
+        <p class="wow"><b>Wow</b>A message on Friday: Saturday morning, dry until 15:00, 90 minutes away.</p>
+        <div class="stack-row"><span class="chip">OpenStreetMap</span><span class="chip">Open-Meteo</span><span class="chip">PostGIS KNN</span><span class="chip">Typer</span><span class="chip">Docker</span><span class="chip">pytest</span></div>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b1"><label for="b1">Shipped, with a 60-second demo</label></div>
+      </div>
+      <div class="build">
+        <div class="top"><span class="tagchip">Urban planning</span><span class="tagchip phase">Phase 2</span></div>
+        <h3>Green Reach</h3>
+        <p>A weekly pipeline that measures how many residents of a Dutch city live within 300 m of public green space (the 300 m part of the 3-30-300 rule) and writes a short planner's briefing.</p>
+        <p class="wow"><b>Wow</b>The Monday briefing arrives by itself, with a map and a trend line.</p>
+        <div class="stack-row"><span class="chip">PDOK</span><span class="chip">CBS</span><span class="chip">BAG</span><span class="chip">Airflow</span><span class="chip">dbt</span><span class="chip">Pandera</span></div>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b2"><label for="b2">Shipped, with a 60-second demo</label></div>
+      </div>
+      <div class="build">
+        <div class="top"><span class="tagchip">Agriculture</span><span class="tagchip phase">Phase 3</span></div>
+        <h3>Field Watch</h3>
+        <p>The week-one spark, grown up: a cloud pipeline that watches a plot near Tirupati through the season with Sentinel-2 and weather, and writes advice in Telugu and English.</p>
+        <p class="wow"><b>Wow</b>An alert on your phone when a field's vegetation index drops against its own history.</p>
+        <div class="stack-row"><span class="chip">Sentinel-2 / STAC</span><span class="chip">Azure Functions</span><span class="chip">Data Factory</span><span class="chip">Terraform</span><span class="chip">pgvector</span><span class="chip">Azure OpenAI</span></div>
+        <p class="caveat">A learning build, not agronomic advice. Check anything actionable with a local agronomist.</p>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b3"><label for="b3">Shipped, with a 60-second demo</label></div>
+      </div>
+      <div class="build">
+        <div class="top"><span class="tagchip">Utility networks</span><span class="tagchip phase">Phase 4</span></div>
+        <h3>Grid Twin</h3>
+        <p>A digital twin of a synthetic power network (or public OpenStreetMap power data) with tracing, connectivity and "what if this substation fails" cascades, served as vector tiles and through an MCP server.</p>
+        <p class="wow"><b>Wow</b>Click a substation and watch the outage spread across the map.</p>
+        <div class="stack-row"><span class="chip">NetworkX / pgRouting</span><span class="chip">PostGIS</span><span class="chip">GeoParquet</span><span class="chip">MapLibre</span><span class="chip">MCP</span></div>
+        <p class="caveat">Synthetic or public data only. Never real customer network data.</p>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b4"><label for="b4">Shipped, with a 60-second demo</label></div>
+      </div>
+      <div class="build">
+        <div class="top"><span class="tagchip">Urban planning + AI</span><span class="tagchip phase">Phase 5</span></div>
+        <h3>Plan Reader</h3>
+        <p>Click a parcel on the map and ask what the planning rules allow there. The answer quotes the exact passage from the planning documents, and refuses when the documents are silent.</p>
+        <p class="wow"><b>Wow</b>A plain-language answer, the cited clause and the parcel highlighted, in a web map and in QGIS.</p>
+        <div class="stack-row"><span class="chip">Ruimtelijkeplannen / DSO</span><span class="chip">pgvector</span><span class="chip">FastAPI</span><span class="chip">MapLibre</span><span class="chip">PyQGIS</span></div>
+        <p class="caveat">Check which planning-document endpoints are open today. Not legal advice: the official source decides.</p>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b5"><label for="b5">Shipped, with a 60-second demo</label></div>
+      </div>
+      <div class="build">
+        <div class="top"><span class="tagchip">Capstone</span><span class="tagchip phase">Phase 6</span></div>
+        <h3>Geo Copilot</h3>
+        <p>An agent that uses your own MCP servers and APIs to answer spatial questions across the other builds, with an eval dashboard, guardrails and cost tracking.</p>
+        <p class="wow"><b>Wow</b>Ask in Dutch or English, watch it plan, query, map and cite, then see its accuracy score for this release.</p>
+        <div class="stack-row"><span class="chip">MCP</span><span class="chip">FastAPI</span><span class="chip">PostGIS</span><span class="chip">Evals</span><span class="chip">Tracing</span><span class="chip">Model swap</span></div>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b6"><label for="b6">Shipped, with a 60-second demo</label></div>
+      </div>
+    </div>
+
+    <p class="build-group">Side quests, pick the ones that pull you</p>
+    <div class="build-grid">
+      <div class="build">
+        <div class="top"><span class="tagchip">Offshore</span><span class="tagchip phase">Phase 4 side quest</span></div>
+        <h3>North Sea Neighbours</h3>
+        <p>Map how offshore wind areas, cables, shipping lanes and protected areas overlap in the Dutch North Sea.</p>
+        <p class="wow"><b>Wow</b>A conflict heat map you can scrub layer by layer.</p>
+        <div class="stack-row"><span class="chip">EMODnet</span><span class="chip">Noordzeeloket</span><span class="chip">DuckDB spatial</span><span class="chip">GeoParquet</span><span class="chip">H3</span><span class="chip">deck.gl</span></div>
+        <p class="caveat">Check each dataset's licence and current access before you build on it.</p>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b7"><label for="b7">Shipped, with a 60-second demo</label></div>
+      </div>
+      <div class="build">
+        <div class="top"><span class="tagchip">LIDAR</span><span class="tagchip phase">Phase 6 side quest</span></div>
+        <h3>Tree Atlas</h3>
+        <p>Detect and count trees from AHN point clouds for one neighbourhood and publish them as a 3D layer.</p>
+        <p class="wow"><b>Wow</b>Fly through a neighbourhood and click any tree for its height and canopy size.</p>
+        <div class="stack-row"><span class="chip">AHN</span><span class="chip">PDAL</span><span class="chip">Canopy height model</span><span class="chip">3D Tiles</span><span class="chip">Rasterio</span></div>
+        <p class="caveat">Public AHN data only. Keep employer datasets out of it, even if the topic overlaps your day job.</p>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b8"><label for="b8">Shipped, with a 60-second demo</label></div>
+      </div>
+      <div class="build">
+        <div class="top"><span class="tagchip">India land data</span><span class="tagchip phase">Phase 5-6 side quest</span></div>
+        <h3>Land Lens</h3>
+        <p>A public-data map around Tirupati showing the airport, highways, industrial zones, water and slope, so any dropped pin gets a one-page area profile.</p>
+        <p class="wow"><b>Wow</b>Drop a pin on any plot and get a profile in seconds.</p>
+        <div class="stack-row"><span class="chip">OpenStreetMap</span><span class="chip">Sentinel-2</span><span class="chip">Copernicus DEM</span><span class="chip">FastAPI</span><span class="chip">MapLibre</span></div>
+        <p class="caveat">Venture-style build: use personal time, public data only, and check your employment contract. It profiles places. It is not valuation or investment advice.</p>
+        <div class="shipped"><input type="checkbox" class="track-box" id="b9"><label for="b9">Shipped, with a 60-second demo</label></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview">
+    <div class="section-head">
+      <span class="tag">The route</span>
+      <h2>Six waypoints, about 580 hours</h2>
+      <p>Each phase ships its build first. The skills list is what that build forces you to learn, and the teal block is the AI practice for the phase. Check items off as you go. Progress saves in this browser, so the page works as a living tracker.</p>
+    </div>
+    <div class="overview-bar">
+      <div class="top-row">
+        <span class="label">Overall progress</span>
+        <span class="pct" id="overall-pct">0%</span>
+      </div>
+      <div class="track"><div class="track-fill" id="overall-fill"></div></div>
+      <div class="wp-strip">
+        <a href="#p1"><span class="wp-n">WP·01 · wk 1-6</span>Engineering foundations</a>
+        <a href="#p2"><span class="wp-n">WP·02 · wk 7-14</span>Pipelines &amp; orchestration</a>
+        <a href="#p3"><span class="wp-n">WP·03 · wk 15-24</span>Azure architecture</a>
+        <a href="#p4"><span class="wp-n">WP·04 · wk 25-32</span>Big geospatial data</a>
+        <a href="#p5"><span class="wp-n">WP·05 · wk 33-40</span>Products &amp; app integration</a>
+        <a href="#p6"><span class="wp-n">WP·06 · wk 41-48+</span>Geo-AI differentiation</a>
+      </div>
+    </div>
+
+    <div class="route">
+
+      <div class="phase" id="p1">
+        <div class="wp-marker">01</div>
+        <div class="phase-card">
+          <div class="ph-head"><h3>Engineering foundations</h3><span class="ph-time mono">wk 1-6 · ~78h</span></div>
+          <div class="ship"><b>You ship · Build 1</b>Send Window, built to a professional standard: typed, tested and containerised, on a PostGIS schema you tuned yourself. Then carry the same standard back to one real script from work, with no customer data going into any AI tool.</div>
+          <p class="objective">Turn "Python that works" into Python a senior engineer signs off on, and turn PostGIS familiarity into query-tuning fluency.</p>
+          <div class="foundation-note"><b>Why fundamentals go first</b>Airflow becomes Dagster, Databricks becomes something else, this decade's foundation model is next decade's footnote. Big-O, relational algebra, the CAP theorem and how a datum transformation works do not expire. This phase is deliberately theory-heavy so every later tool is something you can judge, not only operate.</div>
+          <p class="sub">Skills this build demands</p>
+          <div class="stack-row">
+            <span class="chip">pytest</span><span class="chip">Poetry / uv</span><span class="chip">Typer</span><span class="chip">Docker</span>
+            <span class="chip">mypy</span><span class="chip">pre-commit</span><span class="chip">EXPLAIN ANALYZE</span><span class="chip">GiST / BRIN</span>
+            <span class="chip">Data structures &amp; Big-O</span><span class="chip">Relational theory</span><span class="chip">Geodesy &amp; CRS math</span><span class="chip">CAP theorem</span>
+          </div>
+          <ul class="checklist">
+            <li><input type="checkbox" class="track-box" id="p1-1"><label for="p1-1">Package a script as an installable CLI with Typer + Poetry</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-2"><label for="p1-2">Write pytest suites, including fixtures for GeoDataFrames</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-3"><label for="p1-3">Containerize the tool with a multi-stage Docker build</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-4"><label for="p1-4">Tune a slow PostGIS query with EXPLAIN ANALYZE + a spatial index</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-5"><label for="p1-5">Add type hints and mypy checking to an existing project</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-6"><label for="p1-6">Set up pre-commit (ruff, black, mypy) on a repo</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-7"><label for="p1-7">Explain, in writing, why your chosen spatial index beats the alternatives for a specific query shape (not just "it's faster")</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-8"><label for="p1-8">Derive a datum/projection transformation by hand for one Dutch CRS pair (e.g. RD New ↔ WGS84) instead of only calling pyproj</label></li>
+            <li><input type="checkbox" class="track-box" id="p1-9"><label for="p1-9">Argue the CAP-theorem trade-off behind one real storage choice in a pipeline you've built</label></li>
+          </ul>
+          <div class="ai-block">
+            <span class="ai-title">AI in your workflow · A1 · Pair-programming with discipline</span>
+            <p>Learn to work with a coding agent without handing it your judgment.</p>
+            <ul class="checklist">
+              <li><input type="checkbox" class="track-box" id="a1-1"><label for="a1-1">Write the spec and the failing tests yourself, let an agent implement, and review every diff before merging</label></li>
+              <li><input type="checkbox" class="track-box" id="a1-2"><label for="a1-2">Run one small task with and without AI and log the time and the defects</label></li>
+              <li><input type="checkbox" class="track-box" id="a1-3"><label for="a1-3">Have an AI quiz you on one fundamental (CRS math or indexes) and answer before it reveals anything</label></li>
+              <li><input type="checkbox" class="track-box" id="a1-4"><label for="a1-4">Add a project instructions file (CLAUDE.md or AGENTS.md) to a repo covering conventions, CRS rules and how to run the tests</label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" id="p2">
+        <div class="wp-marker">02</div>
+        <div class="phase-card">
+          <div class="ph-head"><h3>Pipelines &amp; orchestration</h3><span class="ph-time mono">wk 7-14 · ~100h</span></div>
+          <div class="ship"><b>You ship · Build 2</b>Green Reach: PDOK, CBS and BAG ingestion, validated, dbt-modelled, orchestrated by Airflow, tested in CI and landing in PostGIS, with a weekly briefing written from the numbers. It is your ITC thesis topic, run as production engineering.</div>
+          <p class="objective">Move from "I ran a script" to "I run a pipeline someone else can trust": scheduled, tested, and alerting when it breaks.</p>
+          <p class="sub">Skills this build demands</p>
+          <div class="stack-row">
+            <span class="chip">Airflow / Dagster</span><span class="chip">dbt</span><span class="chip">Great Expectations</span><span class="chip">Pandera</span><span class="chip">GitHub Actions</span>
+          </div>
+          <ul class="checklist">
+            <li><input type="checkbox" class="track-box" id="p2-1"><label for="p2-1">Build a multi-task Airflow DAG with retries and failure alerting</label></li>
+            <li><input type="checkbox" class="track-box" id="p2-2"><label for="p2-2">Model a transformation layer in dbt with tests and docs</label></li>
+            <li><input type="checkbox" class="track-box" id="p2-3"><label for="p2-3">Add data-quality checks with Pandera or Great Expectations</label></li>
+            <li><input type="checkbox" class="track-box" id="p2-4"><label for="p2-4">Wire CI (GitHub Actions) to lint and test the pipeline on every push</label></li>
+            <li><input type="checkbox" class="track-box" id="p2-5"><label for="p2-5">Schedule an incremental ingestion job, not a full reload</label></li>
+            <li><input type="checkbox" class="track-box" id="p2-6"><label for="p2-6">Document the pipeline's data lineage end to end</label></li>
+          </ul>
+          <div class="ai-block">
+            <span class="ai-title">AI in your workflow · A2 · LLMs inside pipelines</span>
+            <p>Use a model as one step in a pipeline, and prove it works before you trust it.</p>
+            <ul class="checklist">
+              <li><input type="checkbox" class="track-box" id="a2-1"><label for="a2-1">Extract structured fields from messy text (planning documents, for example) with a JSON schema, validation and retries</label></li>
+              <li><input type="checkbox" class="track-box" id="a2-2"><label for="a2-2">Build a golden set of 30 to 50 labelled cases and score the extraction automatically on every change</label></li>
+              <li><input type="checkbox" class="track-box" id="a2-3"><label for="a2-3">Let an LLM draft dbt model descriptions and test ideas, then edit them by hand</label></li>
+              <li><input type="checkbox" class="track-box" id="a2-4"><label for="a2-4">Generate a weekly briefing where every number comes from SQL and the model only writes the sentences</label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" id="p3">
+        <div class="wp-marker">03</div>
+        <div class="phase-card">
+          <div class="ph-head"><h3>Cloud architecture, Azure</h3><span class="ph-time mono">wk 15-24 · ~122h</span></div>
+          <div class="ship"><b>You ship · Build 3</b>Field Watch on Azure: scheduled Sentinel-2 and weather ingestion, PySpark processing for the heavy raster work, everything provisioned with Terraform, plus an AI advisory layer in Telugu and English. Point the same pipeline at a Dutch city and you get an urban heat-island layer for free.
+            <span class="side">Reuses the pipeline from Build 2, now elastic and managed.</span></div>
+          <p class="objective">Everything above, but elastic, managed and defensible in an interview at an Azure shop, which is most of the Dutch enterprise and utility market you already sell into.</p>
+          <p class="sub">Skills this build demands</p>
+          <div class="stack-row">
+            <span class="chip">Data Factory</span><span class="chip">Databricks (PySpark)</span><span class="chip">ADLS Gen2</span><span class="chip">Azure Functions</span>
+            <span class="chip">Synapse</span><span class="chip">Terraform / Bicep</span><span class="chip">AKS basics</span><span class="chip">STAC APIs</span>
+          </div>
+          <ul class="checklist">
+            <li><input type="checkbox" class="track-box" id="p3-1"><label for="p3-1">Recreate the Phase 2 pipeline with Azure Data Factory as orchestrator</label></li>
+            <li><input type="checkbox" class="track-box" id="p3-2"><label for="p3-2">Process a large raster or point-cloud dataset in Databricks with PySpark</label></li>
+            <li><input type="checkbox" class="track-box" id="p3-3"><label for="p3-3">Provision the environment with Terraform, not click-ops</label></li>
+            <li><input type="checkbox" class="track-box" id="p3-4"><label for="p3-4">Deploy an Azure Function triggered by a Blob Storage upload</label></li>
+            <li><input type="checkbox" class="track-box" id="p3-5"><label for="p3-5">Query Sentinel-2 imagery via Microsoft Planetary Computer's STAC API</label></li>
+            <li><input type="checkbox" class="track-box" id="p3-6"><label for="p3-6">Complete the DP-203 learning path (sit the exam if you want the badge)</label></li>
+          </ul>
+          <div class="ai-block">
+            <span class="ai-title">AI in your workflow · A3 · AI on Azure and inside the database</span>
+            <p>Put retrieval and models where the data already lives, with secrets and costs under control.</p>
+            <ul class="checklist">
+              <li><input type="checkbox" class="track-box" id="a3-1"><label for="a3-1">Store embeddings in Postgres with pgvector and run a hybrid (keyword plus vector) search over a document set</label></li>
+              <li><input type="checkbox" class="track-box" id="a3-2"><label for="a3-2">Build a RAG answer that cites its source passages and refuses when nothing relevant is found</label></li>
+              <li><input type="checkbox" class="track-box" id="a3-3"><label for="a3-3">Call a hosted model through Azure OpenAI or AI Foundry with keys in Key Vault, and log cost and latency per call</label></li>
+              <li><input type="checkbox" class="track-box" id="a3-4"><label for="a3-4">Work through the DP-800 skills (SQL AI Developer Associate) and sit the exam if it is still open</label></li>
+            </ul>
+          </div>
+          <div class="cert-note"><span class="badge">DP-203</span>Azure Data Engineer Associate: the certification most likely to move your rate in the Dutch market, because recruiters and procurement filter on it. <span class="badge">DP-800</span>SQL AI Developer Associate: already on your list, and it maps directly to A3.</div>
+        </div>
+      </div>
+
+      <div class="phase" id="p4">
+        <div class="wp-marker">04</div>
+        <div class="phase-card">
+          <div class="ph-head"><h3>Big geospatial data &amp; architecture</h3><span class="ph-time mono">wk 25-32 · ~98h</span></div>
+          <div class="ship"><b>You ship · Build 4</b>Grid Twin: a synthetic or public-data power network modelled as a lakehouse (bronze, silver, gold), traced and failure-tested in the database, served as vector tiles and exposed to agents through an MCP server.
+            <span class="side">Side quest: North Sea Neighbours, which exercises the same big-data stack on public offshore data.</span></div>
+          <p class="objective">Datasets that do not fit in a GeoDataFrame stop being a wall, and you start designing data architecture instead of only querying it.</p>
+          <p class="sub">Skills this build demands</p>
+          <div class="stack-row">
+            <span class="chip">Apache Sedona</span><span class="chip">DuckDB (spatial)</span><span class="chip">GeoParquet</span><span class="chip">COG</span><span class="chip">STAC</span><span class="chip">Tippecanoe / Martin</span><span class="chip">Overture Maps</span>
+          </div>
+          <ul class="checklist">
+            <li><input type="checkbox" class="track-box" id="p4-1"><label for="p4-1">Run a spatial join at 10M+ rows with Sedona or DuckDB-spatial</label></li>
+            <li><input type="checkbox" class="track-box" id="p4-2"><label for="p4-2">Convert a vector dataset to GeoParquet and benchmark vs. shapefile/GeoJSON</label></li>
+            <li><input type="checkbox" class="track-box" id="p4-3"><label for="p4-3">Publish a raster as a Cloud-Optimized GeoTIFF with a STAC item</label></li>
+            <li><input type="checkbox" class="track-box" id="p4-4"><label for="p4-4">Design bronze / silver / gold layers for one dataset end to end</label></li>
+            <li><input type="checkbox" class="track-box" id="p4-5"><label for="p4-5">Generate and serve vector tiles for a large dataset with Tippecanoe + Martin</label></li>
+            <li><input type="checkbox" class="track-box" id="p4-6"><label for="p4-6">Resolve one theme's entities against Overture Maps' GERS IDs and compare coverage/freshness against PDOK/BAG</label></li>
+          </ul>
+          <div class="ai-block">
+            <span class="ai-title">AI in your workflow · A4 · Agent-facing data interfaces</span>
+            <p>Agents are becoming a main user of data platforms. Learn to expose your data to them safely.</p>
+            <ul class="checklist">
+              <li><input type="checkbox" class="track-box" id="a4-1"><label for="a4-1">Build an MCP server over PostGIS that exposes a few narrow, well-described tools instead of raw SQL by default</label></li>
+              <li><input type="checkbox" class="track-box" id="a4-2"><label for="a4-2">Lock it down: read-only role, row-level security, statement timeout, row caps and an audit log</label></li>
+              <li><input type="checkbox" class="track-box" id="a4-3"><label for="a4-3">Write schema and column descriptions plus a data contract so an agent knows units, CRS and caveats</label></li>
+              <li><input type="checkbox" class="track-box" id="a4-4"><label for="a4-4">Connect it to a chat or coding agent and test five real spatial questions, including one deliberate prompt-injection attempt hidden in a feature name</label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" id="p5">
+        <div class="wp-marker">05</div>
+        <div class="phase-card">
+          <div class="ph-head"><h3>Data products &amp; app integration</h3><span class="ph-time mono">wk 33-40 · ~90h</span></div>
+          <div class="ship"><b>You ship · Build 5</b>Plan Reader: a FastAPI service, a MapLibre web map and a PyQGIS plugin that all answer "what may be built here?" from planning documents, with cited passages. It is a one-person version of the product pattern behind Spatial Eye's own suite.
+            <span class="side">Side quest: Land Lens, a public-data area profile for any pin around Tirupati.</span></div>
+          <p class="objective">A pipeline that ends in a database table is not a product. This is goal ⑥, plugging your work into web and desktop applications, and it turns an engineer into a product engineer.</p>
+          <p class="sub">Skills this build demands</p>
+          <div class="stack-row">
+            <span class="chip">FastAPI</span><span class="chip">OGC API - Features</span><span class="chip">MapLibre GL / deck.gl</span><span class="chip">PyQGIS plugins</span><span class="chip">TiTiler</span>
+          </div>
+          <ul class="checklist">
+            <li><input type="checkbox" class="track-box" id="p5-1"><label for="p5-1">Serve pipeline output through a FastAPI + GeoJSON / OGC API - Features endpoint</label></li>
+            <li><input type="checkbox" class="track-box" id="p5-2"><label for="p5-2">Build a MapLibre or deck.gl frontend that consumes that API</label></li>
+            <li><input type="checkbox" class="track-box" id="p5-3"><label for="p5-3">Write a PyQGIS plugin that pulls from your API straight into QGIS</label></li>
+            <li><input type="checkbox" class="track-box" id="p5-4"><label for="p5-4">Serve dynamic raster tiles with TiTiler</label></li>
+            <li><input type="checkbox" class="track-box" id="p5-5"><label for="p5-5">Deploy the API and frontend to Azure (App Service or AKS)</label></li>
+            <li><input type="checkbox" class="track-box" id="p5-6"><label for="p5-6">Document the API with OpenAPI/Swagger so a stranger could use it</label></li>
+          </ul>
+          <div class="ai-block">
+            <span class="ai-title">AI in your workflow · A5 · Agents inside products</span>
+            <p>Put an agent in front of your product, then measure how often it is right.</p>
+            <ul class="checklist">
+              <li><input type="checkbox" class="track-box" id="a5-1"><label for="a5-1">Give an agent your FastAPI endpoints as tools and add a human approval step before any write</label></li>
+              <li><input type="checkbox" class="track-box" id="a5-2"><label for="a5-2">Build a text-to-SQL eval set for spatial questions (CRS mix-ups, geography vs geometry units, ST_DWithin distances) and track accuracy per release</label></li>
+              <li><input type="checkbox" class="track-box" id="a5-3"><label for="a5-3">Add tracing for prompts, tool calls, latency and cost</label></li>
+              <li><input type="checkbox" class="track-box" id="a5-4"><label for="a5-4">Put the model call behind an interface and prove you can swap vendors, or run an open-weight model locally</label></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" id="p6">
+        <div class="wp-marker">06</div>
+        <div class="phase-card">
+          <div class="ph-head"><h3>Geo-AI &amp; differentiation</h3><span class="ph-time mono">wk 41-48+ · ~90h</span></div>
+          <div class="ship"><b>You ship · Build 6, the capstone</b>Geo Copilot: an agent that works across your own MCP servers and APIs to answer spatial questions in Dutch or English, with an eval dashboard, guardrails and cost per question on show. Domain depth, pipeline engineering and agentic AI in one build.
+            <span class="side">Side quest: Tree Atlas, tree detection from AHN LIDAR as a 3D layer.</span></div>
+          <p class="objective">The layer few people in Dutch GIS consultancy have yet, and what makes you the go-to person instead of one of many competent GIS engineers. Start sampling it early, in parallel with phases 3 to 5.</p>
+          <p class="sub">Skills this build demands</p>
+          <div class="stack-row">
+            <span class="chip">scikit-learn / XGBoost</span><span class="chip">Pretrained EO models (Clay, Prithvi)</span><span class="chip">Geo-embeddings</span><span class="chip">PDAL (LIDAR)</span><span class="chip">LangChain / agents</span><span class="chip">CityGML / 3D Tiles</span>
+          </div>
+          <ul class="checklist">
+            <li><input type="checkbox" class="track-box" id="p6-1"><label for="p6-1">Fine-tune a pretrained remote-sensing foundation model (e.g. Clay, Prithvi) on a small labeled sample, rather than training a CNN from scratch</label></li>
+            <li><input type="checkbox" class="track-box" id="p6-2"><label for="p6-2">Classify a LIDAR point cloud (ground / vegetation / building) with PDAL</label></li>
+            <li><input type="checkbox" class="track-box" id="p6-3"><label for="p6-3">Build a small LLM agent that turns natural-language questions into PostGIS queries</label></li>
+            <li><input type="checkbox" class="track-box" id="p6-4"><label for="p6-4">Generate a 3D city-model slice (CityGML or 3D Tiles) from your own data</label></li>
+            <li><input type="checkbox" class="track-box" id="p6-5"><label for="p6-5">Use a location/geo-embedding, not raw lat/long, as a feature in one classification or regression task</label></li>
+            <li><input type="checkbox" class="track-box" id="p6-6"><label for="p6-6">Write up one Geo-AI experiment as a public case study</label></li>
+          </ul>
+          <div class="ai-block">
+            <span class="ai-title">AI in your workflow · A6 · Honest evaluation</span>
+            <p>The skill that separates an AI engineer from an AI user is knowing exactly where the system fails.</p>
+            <ul class="checklist">
+              <li><input type="checkbox" class="track-box" id="a6-1"><label for="a6-1">Compare a foundation-model embedding against a classic baseline on one task and report where it loses</label></li>
+              <li><input type="checkbox" class="track-box" id="a6-2"><label for="a6-2">Publish an eval dashboard for the capstone agent: accuracy, refusal rate and cost per question</label></li>
+              <li><input type="checkbox" class="track-box" id="a6-3"><label for="a6-3">Write a short risk note on what the agent must never do, and enforce it in code rather than in the prompt</label></li>
+            </ul>
+          </div>
+          <div class="watch-note"><b>On the radar, not on the checklist yet</b>Gaussian-splatting 3D reality capture, live streaming feeds into map platforms and zero-shot geospatial foundation models are moving fast but are still too immature or narrow to commit hours to today. When one is ready, Phase 1's fundamentals make picking it up a rebuild, not a relearn. Revisit this list every 6 months.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="positioning">
+    <div class="section-head">
+      <span class="tag">Cashing it in</span>
+      <h2>Turning the build log into a paycheck</h2>
+      <p>Skills only pay if the market can see them. A short, plain note on where this combination sits and how to make it visible.</p>
+    </div>
+    <div class="pos-grid">
+      <div class="pos-card">
+        <h3>Why this combination is scarce</h3>
+        <p>Most GIS specialists stop at desktop tools and never touch orchestration, cloud infrastructure as code or AI engineering. Most data engineers have no spatial reasoning and would not spot a projection error that corrupts a dashboard. You are building the thin overlap: domain depth (utility networks, Dutch spatial standards, urban planning), a modern data platform, and the ability to put AI into products and into your own workflow safely. The overlap, not any single skill, is what commands a premium. As routine coding gets cheaper, judgment, domain knowledge and trustworthy systems matter more.</p>
+        <p>Titles worth targeting as the roadmap progresses:</p>
+        <ul class="title-list">
+          <li><span class="role-name">Geospatial Data Engineer</span>: pipelines and cloud, spatial-aware</li>
+          <li><span class="role-name">Spatial Data Platform / Architecture Engineer</span>: after phases 3 and 4</li>
+          <li><span class="role-name">Geo-AI Engineer</span>: after Phase 6, still a rare title</li>
+          <li><span class="role-name">Geospatial Solutions / DaaS Product Engineer</span>: matches your Spatial Eye trajectory directly</li>
+        </ul>
+        <p>The clearest hard number comes from North America, where postings disclose pay more consistently. A 2026 analysis of 343 salary-disclosing geospatial postings puts <b>Geospatial Software &amp; Data Engineering at a $167,250 median, the highest of eight categories</b>, with Cloud/DevSecOps second at $150,000. Dutch and EU figures run lower in nominal terms, but there is no reason to expect the pattern (engineering and cloud skills outearning GIS-analyst skills in the same field) to stop at the Atlantic.</p>
+        <p class="source-list">Check current EU ranges yourself rather than trusting a fixed number here: <a href="https://www.geo-careers.com/posts/geospatial-salaries-2026/" target="_blank" rel="noopener">GEO CAREERS, Geospatial Salaries 2026</a>, <a href="https://www.glassdoor.com/Salaries/amsterdam-data-engineer-salary-SRCH_IL.0,9_IM1112_KO10,23.htm" target="_blank" rel="noopener">Glassdoor Amsterdam data engineer</a>, <a href="https://www.payscale.com/research/NL/Job=Data_Engineer/Salary" target="_blank" rel="noopener">PayScale Netherlands</a>, <a href="https://www.salaryexpert.com/salary/job/data-engineer/netherlands" target="_blank" rel="noopener">SalaryExpert Netherlands</a>.</p>
+      </div>
+      <div class="pos-card">
+        <h3>Make it visible</h3>
+        <p><b>Record a 60-second demo for every build.</b> A short screen capture, a repo with an architecture diagram, and a screenshot of the map beat a list of tool names. Pin the builds from phases 2, 5 and 6 on GitHub.</p>
+        <p><b>Publish your evals, failures included.</b> A page showing where your agent gets things wrong reads as seniority, because most AI demos hide it.</p>
+        <p><b>Write the build, not only the code.</b> A short case study per build, covering the problem, the design choices and what broke, shows how you think.</p>
+        <p><b>Use your real story.</b> "I learned by building things from my own life, and I measured where AI helped and where it did not" is specific and believable. Lean on it in interviews.</p>
+        <p><b>Certify selectively.</b> DP-203 and DP-800 are worth the exam fees because recruiters filter on them. Everything else is better proven by a repo than a badge.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="rule-line"></div>
+    <p>Built from your CV and your project files, not a template. Revisit this page as your tracker: progress saves in this browser. Pace is a guide, not a contract. If a phase takes nine weeks instead of eight, the plan is working.</p>
+    <p>Check the facts, figures and tool choices here yourself before you act on them, especially pay figures, exam details and data-access terms. Before you share this page with anyone, check that you are comfortable showing the personal aspirations, employer and client names it contains.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY = 'geo-roadmap-progress-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('input.track-box'));
+  var state = {};
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) state = JSON.parse(raw) || {};
+  } catch (e) { state = {}; }
+
+  function save(){
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function updateProgress(){
+    var total = boxes.length;
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    var pct = total ? Math.round((done/total)*100) : 0;
+    var fill = document.getElementById('overall-fill');
+    var pctEl = document.getElementById('overall-pct');
+    if (fill) fill.style.width = pct + '%';
+    if (pctEl) pctEl.textContent = pct + '% · ' + done + '/' + total + ' items checked';
+  }
+
+  boxes.forEach(function(box){
+    try {
+      if (state[box.id]) box.checked = true;
+    } catch(e) {}
+    box.addEventListener('change', function(){
+      state[box.id] = box.checked;
+      save();
+      updateProgress();
+    });
+  });
+
+  updateProgress();
+})();
+</script>
+
+</body>
+</html>
